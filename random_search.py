@@ -5,7 +5,7 @@
 
 import gym
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 #this function gets states and a weight w
 # it returns action 1 or 0 based on s.w>0 or s.w<0
