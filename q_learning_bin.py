@@ -11,7 +11,7 @@ from gym import wrappers
 #build_state([1,2,3,4,5]) -> 12345
 
 def build_state(features):
-    return int("".joint(map(lambda feature: str(int(feature)),features)))
+    return int("".join(map(lambda feature: str(int(feature)),features)))
 
 
 def to_bin(value,bins):
@@ -32,14 +32,19 @@ class FeatureTransformer:
 
     def transform(self,observation):
 
-        cart_pos, cart_vel, pole_angle, pole_vel = observation
+
+        # cart_pos, cart_vel, pole_angle, pole_vel = float(observation)
+        cart_pos = float(observation[0])
+        cart_vel = float(observation[1])
+        pole_angle = float(observation[2])
+        pole_vel = float(observation[3])
+
 
         return build_state([
-
             to_bin(cart_pos,self.cart_position_bins),
             to_bin(cart_vel, self.cart_velocity_bins),
             to_bin(pole_angle, self.pole_angle_bins),
-            to_bin(pole_vel, self.pole_velocity_bins),
+            to_bin(pole_vel, self.pole_velocity_bins)
         ])
 
 
@@ -60,7 +65,7 @@ class Model:
         return self.Q[index]
 
     #given return G for state action pair (s,a) we update Q(s,a)
-    def update_Q(self,a,s,G):
+    def update_Q(self,s,a,G):
         index=self.feature_transformer.transform(s)
         alpha=10e-3                                     #learning rate
         self.Q[index,a]+=alpha*(G-self.Q[index,a])
