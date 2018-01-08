@@ -42,7 +42,9 @@ class FeatureTransformer:
 
     def __init__(self,env):
 
-        observation_examples=np.array([env.observation_space.sample() for x in range(10000)])
+        # observation_examples=np.array([env.observation_space.sample() for x in range(10000)])
+
+        observation_examples=np.random.random((2000,4))*2-2
         scaler=StandardScaler()             #An standardScalar instance
 
         #standardize data = mean equal to zero and variant equal to 1
@@ -58,14 +60,15 @@ class FeatureTransformer:
         #n_components is the number of exemplars
 
         featurizer=FeatureUnion([
-            ("rbf1",RBFSampler(gamma=5.0,n_components=500)),
-            ("rbf2", RBFSampler(gamma=2.0, n_components=500)),
-            ("rbf3", RBFSampler(gamma=1.0, n_components=500)),
-            ("rbf4", RBFSampler(gamma=0.5, n_components=500)),
+            ("rbf1",RBFSampler(gamma=0.05,n_components=1000)),
+            ("rbf2", RBFSampler(gamma=1.0, n_components=1000)),
+            ("rbf3", RBFSampler(gamma=0.5, n_components=1000)),
+            ("rbf4", RBFSampler(gamma=0.1, n_components=1000)),
         ])
 
-        featurizer.fit(scaler.transform(observation_examples))
+        feature_examples=featurizer.fit_transform(scaler.transform(observation_examples))
 
+        self.dimensions=feature_examples.shape[1]
 
         self.scaler=scaler
         self.featurizer=featurizer
@@ -81,7 +84,7 @@ class FeatureTransformer:
 
 class Model:
 
-    def __init__(self,env,feature_transformer,learning_rate):
+    def __init__(self,env,feature_transformer):
 
         self.env=env
         self.models=[]
@@ -89,26 +92,17 @@ class Model:
 
         #create a Q model for each action (using SGDRegression)
         for i in range(env.action_space.n):
-            model=SGDRegressor(learning_rate=learning_rate,eta0=0.001)
-
-            #the initial target is zero
-            #the target is inside [] (since the default is 2D)
-            model.partial_fit(feature_transformer.transform([env.reset()]),[0])
+            model=SGDRegressor(feature_transformer.dimensions)
             self.models.append(model)
 
     def predict(self,s):
+        s_feature=self.feature_transformer.transform(np.atleast_2d(s))
 
-        s_feature=self.feature_transformer.transform([s])
-
-        #make sure s is 2D (s should be inside [] to make it 2D)
-        assert(len(s_feature.shape)==2)
         return np.array([m.predict(s_feature)[0] for m in self.models])
 
 
     def update(self,s,a,G):
-        s_feature=self.feature_transformer.transform([s])
-        assert(len(s_feature.shape)==2)
-
+        s_feature=self.feature_transformer.transform(np.atleast_2d(s))
         #[G] to make it 2D
         self.models[a].partial_fit(s_feature,[G])
 
@@ -127,19 +121,23 @@ def play_episode(env,model,eps,gamma):
     totalreward=0
     t=0
 
-    while not done and t<10000:
+    while not done and t<2000:
         action=model.greedy_policy(s,eps)
         s_previous=s
         s,reward,done,info=env.step(action)
 
-        # if done and t<199:
-        #     reward=1
+        totalreward+=reward
+
+        if done and t<199:
+            reward=-200
+
+        q_next=model.predict(s)
+        assert(len(q_next.shape)==1)
         #update the model
-        G=reward+gamma*np.max(model.predict(s)[0])
+        G=reward+gamma*np.max(q_next)
         # print("G:",model.predict(s)[0])
         model.update(s_previous,action,G)
 
-        totalreward+=reward
         t+=1
         # print("s:",s)
 
@@ -147,28 +145,7 @@ def play_episode(env,model,eps,gamma):
 
 
 
-def plot_cost_to_go(env,estimator,num_tiles=20):
-    x=np.linspace(env.observation_space.low[0],env.observation_space.high[0],num_tiles)
-    y = np.linspace(env.observation_space.low[1], env.observation_space.high[1], num_tiles)
 
-    X,Y=np.meshgrid(x,y)
-
-    Z=np.apply_along_axis(lambda x: -np.max(estimator.predict(x)),2,np.dstack((x,y)))
-
-    fig=plt.figure(figsize=(10,5))
-
-    # ax=fig.add_subplot(111,projection='3d')
-    ax=Axes3D(fig)
-    surf=ax.plot_surface(X,Y,Z,
-                         rstride=1, cstride=1, cmap=matplotlib.cm.coolwarm, vmin=1.0,vmax=1.0)
-    ax.set_xlabel('position')
-    ax.set_ylabel('velocity')
-    ax.set_zlabel('Cost-to-go=-V(s)')
-    ax.set_title('Cost-to-go_Function')
-
-    fig.colorbar(surf)
-
-    plt.show()
 
 
 def plot_running_average(totalrewards):
@@ -182,10 +159,10 @@ def plot_running_average(totalrewards):
     plt.show()
 
 
-if __name__=='__main__':
-    env=gym.make('MountainCar-v0')
+def main():
+    env=gym.make('CartPole-v0')
     ft=FeatureTransformer(env)
-    model=Model(env,ft,"constant")
+    model=Model(env,ft)
 
     gamma=0.99
 
@@ -195,27 +172,30 @@ if __name__=='__main__':
         monitor_dir='./'+filename+'_'+str(datetime.now())
         env=wrappers.Monitor(env,monitor_dir)
 
-    N = 1500
+    N = 500
 
     totalrewards = np.empty(N)
+    costs=np.empty(N)
 
     for n in range(N):
-        eps = 0.1 *(0.97**(n/10))
-        # eps=0.01
+        eps = 0.1/np.sqrt(n+1)
         totalreward = play_episode(env, model, eps, gamma)
         totalrewards[n] = totalreward
 
-        print("episode:", n, "total reward:", totalreward, "eps:", eps)
-        print("avg reward for last 100 episodes:", totalrewards[max(0, n - 100):(n + 1)].mean())
+        if n % 100==0:
+            print("episode:", n, "total reward:", totalreward, "eps:", eps)
+            print("avg reward for last 100 episodes:", totalrewards[max(0, n - 100):(n + 1)].mean())
 
 
     print("avg reward for last 100 episodes:", 100*totalrewards[-100:].mean())
 
-    print("total steps:", -totalrewards.sum())
+    print("total steps:", totalrewards.sum())
 
     plt.plot(totalrewards)
     plt.title("Rewards")
     plt.show()
     plot_running_average(totalrewards)
 
-    plot_cost_to_go(env,model)
+
+if __name__=='__main__':
+    main()
