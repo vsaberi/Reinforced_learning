@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40fb8e03-d542-4b52-bcd4-97cde45cc7ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Mountain_car_q_learning.py" afterPath="$PROJECT_DIR$/Mountain_car_q_learning.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RBF_Cart_pole_q_learning.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Reinforced_learning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,11 +57,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mountain_car_q_learning.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Mountain_car_q_learning.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Mountain_car_q_learning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="187" column="18" selection-start-line="187" selection-start-column="18" selection-end-line="187" selection-end-column="18" />
+            <state relative-caret-position="97">
+              <caret line="182" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="204" selection-end-column="30" />
+              <folding>
+                <element signature="e#1#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RBF_Cart_pole_q_learning.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RBF_Cart_pole_q_learning.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding>
                 <element signature="e#1#11#0" expanded="true" />
               </folding>
@@ -88,6 +101,7 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/q_learning_bin.py" />
         <option value="$PROJECT_DIR$/Mountain_car_q_learning.py" />
+        <option value="$PROJECT_DIR$/RBF_Cart_pole_q_learning.py" />
       </list>
     </option>
   </component>
@@ -552,8 +566,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Mountain_car_q_learning.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="187" column="18" selection-start-line="187" selection-start-column="18" selection-end-line="187" selection-end-column="18" />
+        <state relative-caret-position="97">
+          <caret line="182" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="204" selection-end-column="30" />
+          <folding>
+            <element signature="e#1#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RBF_Cart_pole_q_learning.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding>
             <element signature="e#1#11#0" expanded="true" />
           </folding>
