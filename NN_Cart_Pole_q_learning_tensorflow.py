@@ -26,7 +26,7 @@ class FeatureTransformer:
 
         # observation_examples=np.array([env.observation_space.sample() for x in range(10000)])
 
-        observation_examples=np.random.random((2000,4))*2-2
+        observation_examples=np.random.random((2000,4))*2-1
         self.scaler=StandardScaler()             #An standardScalar instance
 
         #standardize data = mean equal to zero and variant equal to 1
@@ -41,7 +41,7 @@ class FeatureTransformer:
 class NN:
     def __init__(self,D):
 
-        n=2
+        n=30
         self.w1=tf.Variable(tf.random_normal(shape=(D,n)),name='w1')
         self.b1=tf.Variable(tf.random_normal([n]),name='b1')
 
@@ -55,6 +55,10 @@ class NN:
 
         hidden_out=tf.add(tf.matmul(self.X,self.w1),self.b1)
         hidden_out=tf.nn.sigmoid(hidden_out)
+
+        self.keep_prob = tf.placeholder(tf.float32)
+
+        hidden_out=tf.nn.dropout(hidden_out, self.keep_prob)
 
         Y_hat=tf.add(tf.matmul(hidden_out,self.w2),self.b2)
 
@@ -74,11 +78,11 @@ class NN:
 
 
 
-    def partial_fit(self,X,Y):
-        self.session.run(self.train_op,feed_dict={self.X:X,self.Y:Y})
+    def partial_fit(self,X,Y,keep_p):
+        self.session.run(self.train_op,feed_dict={self.X:X,self.Y:Y,self.keep_prob:keep_p})
 
-    def predict(self,X):
-        return self.session.run(self.predict_op,feed_dict={self.X:X})
+    def predict(self,X,keep_p):
+        return self.session.run(self.predict_op,feed_dict={self.X:X,self.keep_prob:keep_p})
 
 
 
@@ -97,13 +101,13 @@ class Model:
 
     def predict(self,s):
         s=self.scaler.transform(np.atleast_2d(s))
-        return np.array([m.predict(s)[0] for m in self.models])
+        return np.array([m.predict(s,1.0)[0] for m in self.models])
 
 
     def update(self,s,a,G):
         s=self.scaler.transform(np.atleast_2d(s))
 
-        self.models[a].partial_fit(s,[G])
+        self.models[a].partial_fit(s,[G],0.9)
 
 
     def greedy_policy(self,s,eps):
@@ -171,13 +175,14 @@ def main():
         monitor_dir='./'+filename+'_'+str(datetime.now())
         env=wrappers.Monitor(env,monitor_dir)
 
-    N = 5000
+    N = 1000
 
     totalrewards = np.empty(N)
     costs=np.empty(N)
 
     for n in range(N):
-        eps = 0.1/np.sqrt(n+1)
+        eps = 0.1/np.sqrt(n+1)+0.05
+
         totalreward = play_episode(env, model, eps, gamma)
         totalrewards[n] = totalreward
 
@@ -186,7 +191,7 @@ def main():
             print("avg reward for last 100 episodes:", totalrewards[max(0, n - 100):(n + 1)].mean())
 
 
-    print("avg reward for last 100 episodes:", 100*totalrewards[-100:].mean())
+    print("avg reward for last 100 episodes:", totalrewards[-100:].mean())
 
     print("total steps:", totalrewards.sum())
 
