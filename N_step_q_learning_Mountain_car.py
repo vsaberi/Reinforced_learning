@@ -4,7 +4,7 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from gym import wrappers
-import datetime import datetime
+from datetime import datetime
 
 #use some code already written
 import Mountain_car_q_learning
@@ -14,7 +14,7 @@ from Mountain_car_q_learning import plot_cost_to_go, FeatureTransformer, Model, 
 
 class SGDRegressor:
 
-    def __init__(self):
+    def __init__(self,**kwards):
         self.w=None
         self.lr=10e-3
 
@@ -22,7 +22,7 @@ class SGDRegressor:
 
         if self.w is None:
             D=X.shape[1]
-            w=np.random.random(D)/np.sqrt(D)
+            self.w=np.random.random(D)/np.sqrt(D)
         self.w+=self.lr*(Y-X.dot(self.w)).dot(X)
 
     def predict(self,X):
@@ -92,10 +92,49 @@ def play_episode(env,model,eps,gamma,n=5):
 
         while len(rewards)>0:
 
-            G=multiplier.dot(rewards+)
+            G=multiplier.dot(rewards+[-1]*(n-len(rewards)))
+            model.update(states[0],actions[0],G)
+            rewards.pop(0)
+            states.pop(0)
+            actions.pop(0)
+    return totalrewards
 
 
 
+if __name__=='__main__':
+    env = gym.make('MountainCar-v0')
+    ft = FeatureTransformer(env)
+    model = Model(env, ft, "constant")
 
+    gamma = 0.99
+
+    if 'monitor' in sys.argv:
+        filename = os.path.basename(__file__).split('.')[0]
+        monitor_dir = './' + filename + '_' + str(datetime.now())
+        env = wrappers.Monitor(env, monitor_dir)
+
+    N = 1500
+
+    totalrewards = np.empty(N)
+
+    for n in range(N):
+        eps = 0.1 * (0.97 ** (n / 10))
+        # eps=0.01
+        totalreward = play_episode(env, model, eps, gamma)
+        totalrewards[n] = totalreward
+
+        print("episode:", n, "total reward:", totalreward, "eps:", eps)
+        print("avg reward for last 100 episodes:", totalrewards[max(0, n - 100):(n + 1)].mean())
+
+    print("avg reward for last 100 episodes:", 100 * totalrewards[-100:].mean())
+
+    print("total steps:", -totalrewards.sum())
+
+    plt.plot(totalrewards)
+    plt.title("Rewards")
+    plt.show()
+    plot_running_average(totalrewards)
+
+    plot_cost_to_go(env, model)
 
 
