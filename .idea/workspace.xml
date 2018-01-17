@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40fb8e03-d542-4b52-bcd4-97cde45cc7ad" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TD_lambda_q_learning_mountain_car.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TD_lambda_q_learning_mountain_car.py" afterPath="$PROJECT_DIR$/TD_lambda_q_learning_mountain_car.py" />
     </list>
     <ignored path="Reinforced_learning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +47,7 @@
       <file leaf-file-name="NN_Cart_Pole_q_learning_tensorflow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NN_Cart_Pole_q_learning_tensorflow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
+            <state relative-caret-position="2554">
               <caret line="186" column="37" selection-start-line="186" selection-start-column="37" selection-end-line="186" selection-end-column="37" />
               <folding>
                 <element signature="e#1#11#0" expanded="true" />
@@ -60,8 +59,8 @@
       <file leaf-file-name="N_step_q_learning_Mountain_car.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/N_step_q_learning_Mountain_car.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+            <state relative-caret-position="2717">
+              <caret line="122" column="39" selection-start-line="122" selection-start-column="39" selection-end-line="122" selection-end-column="39" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -69,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TD_lambda_q_learning_mountain_car.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TD_lambda_q_learning_mountain_car.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TD_lambda_q_learning_mountain_car.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+            <state relative-caret-position="228">
+              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -81,12 +80,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mountain_car_q_learning.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Mountain_car_q_learning.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Mountain_car_q_learning.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="-1105">
+              <caret line="54" column="34" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
+              <folding>
+                <element signature="e#1#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -198,24 +199,7 @@
       <pane id="Scope" />
     </panes>
   </component>
-  <component name="RunManager" selected="Python.N_step_q_learning_Mountain_car">
-    <configuration default="false" name="SGDRegressor_theano" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Reinforced_learning" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SGDRegressor_theano.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.TD_lambda_q_learning_mountain_car">
     <configuration default="false" name="SGDRegressor_tensorflow" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -280,6 +264,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Reinforced_learning" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/N_step_q_learning_Mountain_car.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TD_lambda_q_learning_mountain_car" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Reinforced_learning" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TD_lambda_q_learning_mountain_car.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -419,19 +420,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.SGDRegressor_theano" />
-      <item index="1" class="java.lang.String" itemvalue="Python.SGDRegressor_tensorflow" />
-      <item index="2" class="java.lang.String" itemvalue="Python.NN_Cart_Pole_q_learning_tensorflow" />
-      <item index="3" class="java.lang.String" itemvalue="Python.test" />
-      <item index="4" class="java.lang.String" itemvalue="Python.N_step_q_learning_Mountain_car" />
+      <item index="0" class="java.lang.String" itemvalue="Python.SGDRegressor_tensorflow" />
+      <item index="1" class="java.lang.String" itemvalue="Python.NN_Cart_Pole_q_learning_tensorflow" />
+      <item index="2" class="java.lang.String" itemvalue="Python.test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.N_step_q_learning_Mountain_car" />
+      <item index="4" class="java.lang.String" itemvalue="Python.TD_lambda_q_learning_mountain_car" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.N_step_q_learning_Mountain_car" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.NN_Cart_Pole_q_learning_tensorflow" />
-        <item index="3" class="java.lang.String" itemvalue="Python.SGDRegressor_tensorflow" />
-        <item index="4" class="java.lang.String" itemvalue="Python.SGDRegressor_theano" />
+        <item index="0" class="java.lang.String" itemvalue="Python.TD_lambda_q_learning_mountain_car" />
+        <item index="1" class="java.lang.String" itemvalue="Python.N_step_q_learning_Mountain_car" />
+        <item index="2" class="java.lang.String" itemvalue="Python.test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.NN_Cart_Pole_q_learning_tensorflow" />
+        <item index="4" class="java.lang.String" itemvalue="Python.SGDRegressor_tensorflow" />
       </list>
     </recent_temporary>
   </component>
@@ -713,17 +714,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Mountain_car_q_learning.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NN_Cart_Pole_q_learning_tensorflow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
+        <state relative-caret-position="2554">
           <caret line="186" column="37" selection-start-line="186" selection-start-column="37" selection-end-line="186" selection-end-column="37" />
           <folding>
             <element signature="e#1#11#0" expanded="true" />
@@ -733,8 +726,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/N_step_q_learning_Mountain_car.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+        <state relative-caret-position="2717">
+          <caret line="122" column="39" selection-start-line="122" selection-start-column="39" selection-end-line="122" selection-end-column="39" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -743,10 +736,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TD_lambda_q_learning_mountain_car.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+        <state relative-caret-position="228">
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Mountain_car_q_learning.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1105">
+          <caret line="54" column="34" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
+          <folding>
+            <element signature="e#1#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
